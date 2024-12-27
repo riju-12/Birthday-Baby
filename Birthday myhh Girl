@@ -1,0 +1,107 @@
+# Birthday-Baby
+# Index.html 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="presentation">
+    <div id="slide1" class="slide">
+      <h1>Happy Birthday!</h1>
+      <p>Today is your special day!</p>
+    </div>
+    <div id="slide2" class="slide">
+      <h2>Wishing You...</h2>
+      <p>Happiness, Joy, and Love!</p>
+    </div>
+    <div id="slide3" class="slide">
+      <h2>Have an Amazing Year Ahead!</h2>
+      <p>You deserve the very best!</p>
+    </div>
+    <div id="endSlide" class="slide">
+      <h1>🎉 Enjoy Your Day! 🎂</h1>
+    </div>
+  </div>
+  <audio id="birthdaySong" src="https://www.soundjay.com/free-music/happy-birthday-to-you-1.mp3" autoplay loop></audio>
+  <button onclick="startPresentation()">Start Presentation</button>
+  <script src="script.js"></script>
+</body>
+</html>
+# style.css
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(to top, #ff9a9e, #fad0c4);
+  color: #fff;
+  overflow: hidden;
+}
+
+h1, h2, p {
+  text-align: center;
+}
+
+.presentation {
+  display: none;
+}
+
+.slide {
+  display: none;
+  animation: fadeIn 2s forwards;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff6f61;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+  background-color: #ff8c74;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+# script.js
+let currentSlide = 0;
+
+function startPresentation() {
+  const slides = document.querySelectorAll('.slide');
+  const presentation = document.querySelector('.presentation');
+  const button = document.querySelector('button');
+
+  button.style.display = 'none';
+  presentation.style.display = 'block';
+
+  function showSlide() {
+    if (currentSlide > 0) slides[currentSlide - 1].style.display = 'none';
+    if (currentSlide < slides.length) {
+      slides[currentSlide].style.display = 'block';
+      currentSlide++;
+      setTimeout(showSlide, 4000);
+    }
+  }
+  showSlide();
+}
